@@ -1,0 +1,5 @@
+name: MoonHorse
+version: 2.0
+main: su.spyme.moonhorse.Main
+commands:
+  horse:

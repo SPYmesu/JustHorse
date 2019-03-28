@@ -1,0 +1,106 @@
+#This plugin was developed for MoonStudio. (https://vk.com/moonstudio_mc)
+#If you find any bug please PM to developer.
+#VK: vk.me/SPY_me
+main:
+  #Enable all plugin features
+  ENABLE: true
+  #Enable GUI with horse settings
+  ENABLE_SETTINGS: true
+  #Enable cooldown between horse spawn
+  ENABLE_COOLDOWN: true
+perm:
+  #Main permission
+  USE: 'moonhorse.use'
+  #Permission for /horse
+  USE_COMMAND: 'moonhorse.use_command'
+
+  #Colors
+  COLOR_BLACK: 'moonhorse.color.black'
+  COLOR_BROWN: 'moonhorse.color.brown'
+  COLOR_CHESTNUT: 'moonhorse.color.chestnut'
+  COLOR_CREAMY: 'moonhorse.color.creamy'
+  COLOR_DARK_BROWN: 'moonhorse.color.dark_brown'
+  COLOR_GRAY: 'moonhorse.color.gray'
+  COLOR_WHITE: 'moonhorse.color.white'
+
+  #Styles
+  STYLE_BLACK_DOTS: 'moonhorse.style.black_dots'
+  STYLE_NONE: 'moonhorse.style.none'
+  STYLE_WHITE: 'moonhorse.style.white'
+  STYLE_WHITE_DOTS: 'moonhorse.style.white_dots'
+  STYLE_WHITEFIELD: 'moonhorse.style.whitefield'
+
+  #Armor
+  ARMOR_DIAMOND: 'moonhorse.armor.diamond'
+  ARMOR_GOLD: 'moonhorse.armor.gold'
+  ARMOR_IRON: 'moonhorse.armor.iron'
+  ARMOR_NONE: 'moonhorse.armor.none'
+settings:
+  #Cacnel any damage for plugin's horse
+  CANCEL_DAMAGE: true
+  #Remove horse entity on death
+  REMOVE_ON_DEATH: true
+  #Remove horse entity while it have no passengers (On dismount)
+  REMOVE_ON_GET_OFF: true
+  #Remove horse entity if owner log out
+  REMOVE_ON_QUIT: true
+msg:
+  NO_PERMISSION: '&2MoonHorse &8» &fYou have no permission.'
+  USAGE: '&2MoonHorse &8» &fUsage: &6/horse'\
+  #Horse display name (Horse %player%)
+  HORSE: 'Horse'
+  ON_COOLDOWN: '&2MoonHorse &8» &fPlease wait for a while'
+  MENU_TITLE: '&4&lHorse settings'
+  DUPLICATE_HORSE: '&2MoonHorse &8» &fYou already have a horse'
+  #Protection against bad boys :D
+  WHERE_HORSE: '&2MoonHorse &8» &fWhere is your horse?'
+
+  #Colors
+  COLOR: '&a&lColor: &a%name%
+
+          &7Click to change
+          &7color of your horse'
+  COLOR_BLACK: 'Black'
+  COLOR_DENY_BLACK: 'For player'
+  COLOR_BROWN: 'Brown'
+  COLOR_DENY_BROWN: 'For VIP'
+  COLOR_CHESTNUT: 'Chestnut'
+  COLOR_DENY_CHESTNUT: 'For VIP+'
+  COLOR_CREAMY: 'Creamy'
+  COLOR_DENY_CREAMY: 'For MVP'
+  COLOR_DARK_BROWN: 'Dark Brown'
+  COLOR_DENY_DARK_BROWN: 'For MVP+'
+  COLOR_GRAY: 'Gray'
+  COLOR_DENY_GRAY: 'For MRP'
+  COLOR_WHITE: 'White'
+  COLOR_DENY_WHITE: 'For MRP+'
+
+  #Styles
+  STYLE: '&a&lStyle: &a%name%
+
+          &7Click to change
+          &7style of your horse'
+  STYLE_BLACK_DOTS: 'Black dots'
+  STYLE_DENY_BLACK_DOTS: 'For VIP'
+  STYLE_NONE: 'None'
+  STYLE_DENY_NONE: 'For player'
+  STYLE_WHITE: 'White'
+  STYLE_DENY_WHITE: 'For VIP+'
+  STYLE_WHITE_DOTS: 'White dots'
+  STYLE_DENY_WHITE_DOTS: 'For MVP'
+  STYLE_WHITEFIELD: 'Whitefield'
+  STYLE_DENY_WHITEFIELD: 'For MVP+'
+
+  #Armor
+  ARMOR: '&a&lArmor: &a%name%
+
+          &7Click to change
+          &7armor of your horse'
+  ARMOR_DIAMOND: 'Diamond'
+  ARMOR_DENY_DIAMOND: 'For MVP'
+  ARMOR_GOLD: 'Gold'
+  ARMOR_DENY_GOLD: 'For VIP+'
+  ARMOR_IRON: 'Iron'
+  ARMOR_DENY_IRON: 'For VIP'
+  ARMOR_NONE: 'None'
+  ARMOR_DENY_NONE: 'For player'
