@@ -51,7 +51,7 @@ public class Main extends JavaPlugin implements Listener{
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "MoonHorse disabled in config.");
             return;
         }
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MoonHorse v2.0 by SPY_me enabled.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MoonHorse v2.1 by SPY_me enabled.");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiMenu(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), this);
@@ -85,6 +85,7 @@ public class Main extends JavaPlugin implements Listener{
                 Map<Player, Integer> newCooldown = new HashMap<>();
                 cooldown.forEach((player, integer) -> {
                     if(integer != 0 && player != null){
+                        System.out.println(player.getName() + " " + integer);
                         newCooldown.put(player, integer - 1);
                     }
                 });
@@ -95,7 +96,7 @@ public class Main extends JavaPlugin implements Listener{
 
     public void onDisable(){
         horses.forEach((player, horse) -> horse.remove());
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MoonHorse v2.0 by SPY_me disabled.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MoonHorse v2.1 by SPY_me disabled.");
     }
 
     public String getMessage(String key){
@@ -122,7 +123,7 @@ public class Main extends JavaPlugin implements Listener{
         horse.setColor(Horse.Color.GRAY);
         horse.setAdult();
 
-        horse.setCustomName(Main.horse + " " + player.getDisplayName());
+        horse.setCustomName(Main.horse + " " + player.getName());
         horse.setCustomNameVisible(true);
 
         horse.addPassenger(player);
@@ -134,7 +135,8 @@ public class Main extends JavaPlugin implements Listener{
     }
 
     static void addCooldown(Player player){
-        cooldown.putIfAbsent(player, Main.cooldownTime);
+        System.out.println("adding " + player.getName());
+        cooldown.put(player, Main.cooldownTime);
     }
 
     /**
@@ -144,5 +146,14 @@ public class Main extends JavaPlugin implements Listener{
      */
     private void timer(Runnable runnable){
         bukkitScheduler.runTaskTimer(this, runnable, (long) 20, (long) 20);
+    }
+
+    /**
+     * Запустить таймер
+     *
+     * @param runnable таск
+     */
+    void later(Runnable runnable){
+        bukkitScheduler.runTaskLater(this, runnable, (long) 1);
     }
 }

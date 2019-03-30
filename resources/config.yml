@@ -44,9 +44,11 @@ settings:
   REMOVE_ON_GET_OFF: true
   #Remove horse entity if owner log out
   REMOVE_ON_QUIT: true
+  #Time to cool down
+  COOLDOWN_TIME: 5
 msg:
   NO_PERMISSION: '&2MoonHorse &8» &fYou have no permission.'
-  USAGE: '&2MoonHorse &8» &fUsage: &6/horse'\
+  USAGE: '&2MoonHorse &8» &fUsage: &6/horse'
   #Horse display name (Horse %player%)
   HORSE: 'Horse'
   ON_COOLDOWN: '&2MoonHorse &8» &fPlease wait for a while'

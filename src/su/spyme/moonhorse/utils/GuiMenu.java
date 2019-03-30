@@ -45,7 +45,7 @@ public class GuiMenu implements Listener{
 
     private void openOwner(){
         if(!this.isOpened()){
-            player.getPlayer().openInventory(inventory);
+            player.openInventory(inventory);
         }
     }
 
@@ -86,7 +86,7 @@ public class GuiMenu implements Listener{
     }
 
     private boolean isOpened(){
-        return player.getPlayer().getOpenInventory().getTopInventory().equals(this.getInventory());
+        return player.getOpenInventory().getTopInventory().equals(this.getInventory());
     }
 
     /**

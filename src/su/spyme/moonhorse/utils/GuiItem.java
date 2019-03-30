@@ -2,7 +2,6 @@ package su.spyme.moonhorse.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.Inventory;
@@ -29,8 +28,8 @@ public class GuiItem{
         this(guiMenu, x, y, item, "");
     }
 
-    public GuiItem(GuiMenu guiMenu, int x, int y, Material material, short data, int amount){
-        this(guiMenu, x, y, new ItemStack(material, amount, data));
+    public GuiItem(GuiMenu guiMenu, int x, int y, Material material, int amount){
+        this(guiMenu, x, y, new ItemStack(material, amount));
     }
 
     private GuiItem(GuiMenu guiMenu, int x, int y, ItemStack item, String text){
@@ -59,10 +58,8 @@ public class GuiItem{
         if(item == null){
             return null;
         }
-        if(!(item instanceof CraftItemStack)){
-            inventory.setItem(0, item);
-            item = inventory.getItem(0);
-        }
+        inventory.setItem(0, item);
+        item = inventory.getItem(0);
         return item;
     }
 

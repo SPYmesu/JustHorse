@@ -74,7 +74,7 @@ public class Listeners implements Listener{
     @EventHandler
     public void onClick(InventoryClickEvent event){
         Player player = (Player) event.getWhoClicked();
-        if(event.getInventory().getTitle().equals(Main.horse + " " + player.getDisplayName())){
+        if(player.getOpenInventory().getTitle().equals(Main.horse + " " + player.getName())){
             event.setCancelled(true);
             if(Main.enableSettings){
                 GuiMenu.openGui(new GuiMenuHorse(player));
@@ -85,10 +85,11 @@ public class Listeners implements Listener{
     @EventHandler
     public void onInv(InventoryOpenEvent event){
         Player player = (Player) event.getPlayer();
-        if(event.getInventory().getTitle().equals(Main.horse + " " + player.getDisplayName()) && Main.enableSettings){
-            event.setCancelled(true);
-            GuiMenu.openGui(new GuiMenuHorse(player));
-        }
+        Main.instance.later(() -> {
+            if(player.getOpenInventory().getTitle().equals(Main.horse + " " + player.getName()) && Main.enableSettings){
+                GuiMenu.openGui(new GuiMenuHorse(player));
+            }
+        });
     }
 
 

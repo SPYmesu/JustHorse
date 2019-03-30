@@ -26,7 +26,7 @@ public class CommandHorse implements CommandExecutor{
             return false;
         }
 
-        Main.spawnHorse((Player) commandSender);
+        Main.spawnHorse((Player)commandSender);
         return true;
     }
 }

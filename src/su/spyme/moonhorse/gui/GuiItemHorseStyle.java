@@ -15,8 +15,8 @@ public class GuiItemHorseStyle extends GuiItem implements Listener{
     private String perm;
     private Horse.Style horseStyle;
 
-    GuiItemHorseStyle(GuiMenu guiMenu, int x, int y, Material material, short data, Horse.Style horseStyle){
-        super(guiMenu, x, y, material, data, 1);
+    GuiItemHorseStyle(GuiMenu guiMenu, int x, int y, Material material, Horse.Style horseStyle){
+        super(guiMenu, x, y, material, 1);
         this.perm = Main.instance.getPermission("style_" + horseStyle.name());
         String name = Main.instance.getMessage("style_" + horseStyle.name());
         String deny = Main.instance.getMessage("style_deny_" + horseStyle.name());

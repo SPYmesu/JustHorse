@@ -1,5 +1,6 @@
 name: MoonHorse
-version: 2.0
+version: 2.1
+api-version: 1.13
 main: su.spyme.moonhorse.Main
 commands:
   horse:
