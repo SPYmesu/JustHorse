@@ -85,7 +85,6 @@ public class Main extends JavaPlugin implements Listener{
                 Map<Player, Integer> newCooldown = new HashMap<>();
                 cooldown.forEach((player, integer) -> {
                     if(integer != 0 && player != null){
-                        System.out.println(player.getName() + " " + integer);
                         newCooldown.put(player, integer - 1);
                     }
                 });
@@ -135,7 +134,6 @@ public class Main extends JavaPlugin implements Listener{
     }
 
     static void addCooldown(Player player){
-        System.out.println("adding " + player.getName());
         cooldown.put(player, Main.cooldownTime);
     }
 
