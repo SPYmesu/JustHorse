@@ -1,10 +1,10 @@
-package su.spyme.moonhorse.gui;
+package su.spyme.justhorse.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
-import su.spyme.moonhorse.Main;
-import su.spyme.moonhorse.utils.GuiMenu;
+import su.spyme.justhorse.Main;
+import su.spyme.justhorse.utils.GuiMenu;
 
 /**
  * Гуи настройки лошади
@@ -22,7 +22,7 @@ public class GuiMenuHorse extends GuiMenu{
         addItem(new GuiItemHorseColor(this, x1++, 1, Material.GRAY_DYE, Horse.Color.GRAY));
         addItem(new GuiItemHorseColor(this, x1++, 1, Material.COCOA_BEANS, Horse.Color.BROWN));
         addItem(new GuiItemHorseColor(this, x1++, 1, Material.BRICK, Horse.Color.DARK_BROWN));
-        addItem(new GuiItemHorseColor(this, x1++, 1, Material.DANDELION_YELLOW, Horse.Color.CHESTNUT));
+        addItem(new GuiItemHorseColor(this, x1++, 1, Material.YELLOW_DYE, Horse.Color.CHESTNUT));
         addItem(new GuiItemHorseColor(this, x1++, 1, Material.ORANGE_DYE, Horse.Color.CREAMY));
         addItem(new GuiItemHorseColor(this, x1++, 1, Material.INK_SAC, Horse.Color.BLACK));
         addItem(new GuiItemHorseColor(this, x1, 1, Material.BONE_MEAL, Horse.Color.WHITE));

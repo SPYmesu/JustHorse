@@ -1,19 +1,21 @@
-package su.spyme.moonhorse;
+package su.spyme.justhorse;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitScheduler;
-import su.spyme.moonhorse.gui.GuiListener;
-import su.spyme.moonhorse.utils.GuiMenu;
+import org.jetbrains.annotations.NotNull;
+import su.spyme.justhorse.gui.GuiListener;
+import su.spyme.justhorse.utils.GuiMenu;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 public class Main extends JavaPlugin implements Listener{
 
@@ -43,42 +45,41 @@ public class Main extends JavaPlugin implements Listener{
     public static Map<Player, Horse> horses = new HashMap<>();
     static Map<Player, Integer> cooldown = new HashMap<>();
 
-    private static BukkitScheduler bukkitScheduler = Bukkit.getScheduler();
+    private static final BukkitScheduler bukkitScheduler = Bukkit.getScheduler();
 
     public void onEnable(){
         boolean enable = getConfig().getBoolean("main.ENABLE");
         if(!enable){
-            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "MoonHorse disabled in config.");
+            Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "JustHorse disabled in config.");
             return;
         }
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MoonHorse v2.1 by SPY_me enabled.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.2 by SPY_me enabled.");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiMenu(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), this);
-        getCommand("horse").setExecutor(new CommandHorse());
         instance = this;
         saveDefaultConfig();
 
         //Права
-        permission = getConfig().getString("perm.USE_COMMAND");
+        permission = getConfig().getString("perm.USE_COMMAND", "justhorse.use");
 
         //Настройки
-        enableSettings = getConfig().getBoolean("main.ENABLE_SETTINGS");
-        enableCooldown = getConfig().getBoolean("main.ENABLE_COOLDOWN");
-        getOff = getConfig().getBoolean("settings.REMOVE_ON_GET_OFF");
-        quit = getConfig().getBoolean("settings.REMOVE_ON_PLAYER_QUIT");
-        death = getConfig().getBoolean("settings.REMOVE_ON_DEATH");
-        damage = getConfig().getBoolean("settings.CANCEL_DAMAGE");
-        cooldownTime = getConfig().getInt("settings.COOLDOWN_TIME");
+        enableSettings = getConfig().getBoolean("main.ENABLE_SETTINGS", true);
+        enableCooldown = getConfig().getBoolean("main.ENABLE_COOLDOWN", true);
+        getOff = getConfig().getBoolean("settings.REMOVE_ON_GET_OFF", true);
+        quit = getConfig().getBoolean("settings.REMOVE_ON_PLAYER_QUIT", true);
+        death = getConfig().getBoolean("settings.REMOVE_ON_DEATH", true);
+        damage = getConfig().getBoolean("settings.CANCEL_DAMAGE", true);
+        cooldownTime = getConfig().getInt("settings.COOLDOWN_TIME", 0);
 
         //Сообщения
-        horse = getConfig().getString("msg.HORSE").replaceAll("&", "§");
-        noPermission = getConfig().getString("msg.NO_PERMISSION").replaceAll("&", "§");
-        usage = getConfig().getString("msg.USAGE").replaceAll("&", "§");
-        onCooldown = getConfig().getString("msg.ON_COOLDOWN").replaceAll("&", "§");
-        menuTitle = getConfig().getString("msg.MENU_TITLE").replaceAll("&", "§");
-        duplicateHorse = getConfig().getString("msg.DUPLICATE_HORSE").replaceAll("&", "§");
-        whereHorse = getConfig().getString("msg.WHERE_HORSE").replaceAll("&", "§");
+        horse = getConfig().getString("msg.HORSE", "").replaceAll("&", "§");
+        noPermission = getConfig().getString("msg.NO_PERMISSION", "").replaceAll("&", "§");
+        usage = getConfig().getString("msg.USAGE", "").replaceAll("&", "§");
+        onCooldown = getConfig().getString("msg.ON_COOLDOWN", "").replaceAll("&", "§");
+        menuTitle = getConfig().getString("msg.MENU_TITLE", "").replaceAll("&", "§");
+        duplicateHorse = getConfig().getString("msg.DUPLICATE_HORSE", "").replaceAll("&", "§");
+        whereHorse = getConfig().getString("msg.WHERE_HORSE", "").replaceAll("&", "§");
 
         if(enableCooldown){
             timer(() -> {
@@ -95,11 +96,34 @@ public class Main extends JavaPlugin implements Listener{
 
     public void onDisable(){
         horses.forEach((player, horse) -> horse.remove());
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "MoonHorse v2.1 by SPY_me disabled.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.2 by SPY_me disabled.");
+    }
+
+    @Override
+    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String label, String[] args){
+        if(!(commandSender instanceof Player)) return false;
+
+        if(!commandSender.hasPermission(Main.permission)){
+            commandSender.sendMessage(Main.noPermission);
+            return false;
+        }
+
+        if(args.length != 0){
+            commandSender.sendMessage(Main.usage);
+            return false;
+        }
+
+        if(Main.cooldown.get(commandSender) != null && Main.enableCooldown){
+            commandSender.sendMessage(Main.onCooldown);
+            return false;
+        }
+
+        Main.spawnHorse((Player)commandSender);
+        return true;
     }
 
     public String getMessage(String key){
-        return getConfig().getString("msg." + key.toUpperCase()).replaceAll("&", "§");
+        return getConfig().getString("msg." + key.toUpperCase(), key).replaceAll("&", "§");
     }
 
     public String getPermission(String key){
@@ -143,7 +167,7 @@ public class Main extends JavaPlugin implements Listener{
      * @param runnable таск
      */
     private void timer(Runnable runnable){
-        bukkitScheduler.runTaskTimer(this, runnable, (long) 20, (long) 20);
+        bukkitScheduler.runTaskTimer(this, runnable, 20, 20);
     }
 
     /**
@@ -152,6 +176,6 @@ public class Main extends JavaPlugin implements Listener{
      * @param runnable таск
      */
     void later(Runnable runnable){
-        bukkitScheduler.runTaskLater(this, runnable, (long) 1);
+        bukkitScheduler.runTaskLater(this, runnable, 1);
     }
 }

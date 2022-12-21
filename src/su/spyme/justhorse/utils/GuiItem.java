@@ -1,4 +1,4 @@
-package su.spyme.moonhorse.utils;
+package su.spyme.justhorse.utils;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
@@ -20,9 +20,9 @@ public class GuiItem{
     private String text; //отображаемый текст
     private int pos; //pos in inventory
     private ItemStack item; //Предметы на разном языке
-    private GuiMenu guiMenu; //Меню, в котором они расположены (или скрыты)
+    private final GuiMenu guiMenu; //Меню, в котором они расположены (или скрыты)
     private boolean enchantEffect = false; //эффект зачарования
-    private ItemFlag[] itemFlags = ItemFlag.values();
+    private final ItemFlag[] itemFlags = ItemFlag.values();
 
     private GuiItem(GuiMenu guiMenu, int x, int y, ItemStack item){
         this(guiMenu, x, y, item, "");
@@ -45,9 +45,11 @@ public class GuiItem{
         }
         this.pos = this.getPos(x, y);
         ItemMeta meta = item.getItemMeta();
-        meta.removeItemFlags(ItemFlag.values());
-        meta.addItemFlags(this.itemFlags);
-        item.setItemMeta(meta);
+        if(meta != null){
+            meta.removeItemFlags(ItemFlag.values());
+            meta.addItemFlags(this.itemFlags);
+            item.setItemMeta(meta);
+        }
         this.item = fixItem(item);
         this.setText(this.text);
         this.setEnchantEffect(this.enchantEffect);
@@ -73,7 +75,7 @@ public class GuiItem{
                 return true;
             }else{
                 return item1.getType() == item2.getType() &&
-                        item1.getDurability() == item2.getDurability() &&
+                        item1.getItemMeta() == item2.getItemMeta() &&
                         Objects.equals(item1.getItemMeta(), item2.getItemMeta());
             }
         }else{
@@ -152,14 +154,18 @@ public class GuiItem{
         if(text != null){
             String[] data = text.split("(::|\n|\r)");
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(data[0]);
-            meta.setLore(data.length > 1 ? Arrays.asList(data).subList(1, data.length) : null);
-            item.setItemMeta(meta);
+            if(meta != null){
+                meta.setDisplayName(data[0]);
+                meta.setLore(data.length > 1 ? Arrays.asList(data).subList(1, data.length) : null);
+                item.setItemMeta(meta);
+            }
         }else{
             ItemMeta meta = item.getItemMeta();
-            meta.setDisplayName(null);
-            meta.setLore(null);
-            item.setItemMeta(meta);
+            if(meta != null){
+                meta.setDisplayName(null);
+                meta.setLore(null);
+                item.setItemMeta(meta);
+            }
         }
     }
 

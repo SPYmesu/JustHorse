@@ -1,4 +1,4 @@
-package su.spyme.moonhorse.gui;
+package su.spyme.justhorse.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
@@ -7,15 +7,15 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import su.spyme.moonhorse.Main;
-import su.spyme.moonhorse.utils.GuiItem;
-import su.spyme.moonhorse.utils.GuiMenu;
+import su.spyme.justhorse.Main;
+import su.spyme.justhorse.utils.GuiItem;
+import su.spyme.justhorse.utils.GuiMenu;
 
 
 public class GuiItemHorseArmor extends GuiItem implements Listener{
 
-    private String perm;
-    private Material material;
+    private final String perm;
+    private final Material material;
 
     GuiItemHorseArmor(GuiMenu guiMenu, int x, int y, Material material, String name){
         super(guiMenu, x, y, material, 1);

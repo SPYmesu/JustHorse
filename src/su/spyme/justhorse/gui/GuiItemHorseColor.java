@@ -1,19 +1,19 @@
-package su.spyme.moonhorse.gui;
+package su.spyme.justhorse.gui;
 
 import org.bukkit.Material;
 import org.bukkit.entity.Horse;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import su.spyme.moonhorse.Main;
-import su.spyme.moonhorse.utils.GuiItem;
-import su.spyme.moonhorse.utils.GuiMenu;
+import su.spyme.justhorse.Main;
+import su.spyme.justhorse.utils.GuiItem;
+import su.spyme.justhorse.utils.GuiMenu;
 
 
 public class GuiItemHorseColor extends GuiItem implements Listener{
 
-    private String perm;
-    private Horse.Color horseColor;
+    private final String perm;
+    private final Horse.Color horseColor;
 
     GuiItemHorseColor(GuiMenu guiMenu, int x, int y, Material material, Horse.Color horseColor){
         super(guiMenu, x, y, material, 1);

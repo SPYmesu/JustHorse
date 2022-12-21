@@ -1,10 +1,10 @@
-package su.spyme.moonhorse.gui;
+package su.spyme.justhorse.gui;
 
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
 import org.bukkit.inventory.ItemStack;
-import su.spyme.moonhorse.utils.GuiItem;
+import su.spyme.justhorse.utils.GuiItem;
 
 import java.util.HashMap;
 import java.util.Map;
