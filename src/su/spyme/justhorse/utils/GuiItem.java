@@ -179,7 +179,7 @@ public class GuiItem{
         ItemMeta meta = item.getItemMeta();
         if(meta != null){
             if(enchantEffect){
-                meta.addEnchant(Enchantment.ARROW_DAMAGE, 1, true);
+                meta.addEnchant(Enchantment.POWER, 1, true);
             }else{
                 meta.getEnchants().keySet().forEach(meta::removeEnchant);
             }

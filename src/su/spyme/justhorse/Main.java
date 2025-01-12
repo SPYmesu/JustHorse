@@ -84,18 +84,24 @@ public class Main extends JavaPlugin implements Listener{
         if(enableCooldown){
             timer(() -> {
                 Map<Player, Integer> newCooldown = new HashMap<>();
-                cooldown.forEach((player, integer) -> {
+                for(Map.Entry<Player, Integer> entry : cooldown.entrySet()){
+                    Player player = entry.getKey();
+                    Integer integer = entry.getValue();
                     if(integer != 0 && player != null){
                         newCooldown.put(player, integer - 1);
                     }
-                });
+                }
                 cooldown = newCooldown;
             });
         }
     }
 
     public void onDisable(){
-        horses.forEach((player, horse) -> horse.remove());
+        for(Map.Entry<Player, Horse> entry : horses.entrySet()){
+            Player player = entry.getKey();
+            Horse value = entry.getValue();
+            value.remove();
+        }
         Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.2 by SPY_me disabled.");
     }
 
