@@ -9,16 +9,16 @@ import su.spyme.justhorse.utils.GuiItem;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GuiListener implements Listener{
+public class GuiListener implements Listener {
 
     static Map<ItemStack, GuiItem> guiItems = new HashMap<>();
 
     @EventHandler
-    public void execute(InventoryClickEvent event){
-        try{
+    public void execute(InventoryClickEvent event) {
+        try {
             guiItems.get(event.getCurrentItem()).click(event);
             event.setCancelled(true);
-        }catch(NullPointerException ignored){
+        } catch (NullPointerException ignored) {
         }
     }
 }

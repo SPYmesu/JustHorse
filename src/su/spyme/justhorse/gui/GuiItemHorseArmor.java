@@ -12,12 +12,12 @@ import su.spyme.justhorse.utils.GuiItem;
 import su.spyme.justhorse.utils.GuiMenu;
 
 
-public class GuiItemHorseArmor extends GuiItem implements Listener{
+public class GuiItemHorseArmor extends GuiItem implements Listener {
 
     private final String perm;
     private final Material material;
 
-    GuiItemHorseArmor(GuiMenu guiMenu, int x, int y, Material material, String name){
+    GuiItemHorseArmor(GuiMenu guiMenu, int x, int y, Material material, String name) {
         super(guiMenu, x, y, material, 1);
         this.perm = Main.instance.getPermission("armor_" + name);
         String deny = Main.instance.getMessage("armor_deny_" + name);
@@ -26,7 +26,7 @@ public class GuiItemHorseArmor extends GuiItem implements Listener{
 
         StringBuilder builder = new StringBuilder(Main.instance.getMessage("armor").replace("%name%", name));
 
-        if(!deny.isEmpty()){
+        if (!deny.isEmpty()) {
             builder.append("\n§r\n").append(deny);
         }
 
@@ -35,18 +35,18 @@ public class GuiItemHorseArmor extends GuiItem implements Listener{
     }
 
     @EventHandler
-    public void click(InventoryClickEvent event){
+    public void click(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Horse horse = Main.horses.get(player);
-        if(horse == null){
+        if (horse == null) {
             player.sendMessage(Main.whereHorse);
-        }else if(player.hasPermission(this.perm)){
-            if(this.material != Material.BARRIER){
+        } else if (player.hasPermission(this.perm)) {
+            if (this.material != Material.BARRIER) {
                 horse.getInventory().setArmor(new ItemStack(this.material));
-            }else{
+            } else {
                 horse.getInventory().setArmor(null);
             }
-        }else{
+        } else {
             player.sendMessage(Main.noPermission);
         }
     }

@@ -19,7 +19,7 @@ import java.util.Set;
 /**
  * Гуи меню
  */
-public class GuiMenu implements Listener{
+public class GuiMenu implements Listener {
     private Player player; //Игрок
     private Inventory inventory; //Инвентарь
     private final Set<GuiItem> items = new HashSet<>(); //Предметы
@@ -34,58 +34,70 @@ public class GuiMenu implements Listener{
      * @param size   1-6
      * @param title  название гуи
      */
-    public GuiMenu(Player player, int size, String title){
+    public GuiMenu(Player player, int size, String title) {
         this.player = player;
         this.inventory = Bukkit.createInventory(null, size * 9, title.length() > 32 ? title.substring(0, 32) : title);
     }
 
-    public GuiMenu(){
+    public GuiMenu() {
 
     }
 
-    private void openOwner(){
-        if(!this.isOpened()){
+    private static int getWidth(InventoryType type) {
+        return switch (type) {
+            case CHEST, PLAYER, ENDER_CHEST, SHULKER_BOX -> 9;
+            case DISPENSER, DROPPER, WORKBENCH -> 3;
+            case HOPPER -> 5;
+            default -> -1;
+        };
+    }
+
+    public static void openGui(GuiMenu gui) {
+        gui.openOwner();
+    }
+
+    private void openOwner() {
+        if (!this.isOpened()) {
             player.openInventory(inventory);
         }
     }
 
     @EventHandler
-    public void onInventoryClickEvent(InventoryClickEvent event){
+    public void onInventoryClickEvent(InventoryClickEvent event) {
         InventoryAction action = event.getAction();
-        if(Objects.equals(event.getClickedInventory(), this.getInventory()) ||
-                !(action.equals(InventoryAction.PICKUP_ALL) || action.equals(InventoryAction.PLACE_ALL))){
+        if (Objects.equals(event.getClickedInventory(), this.getInventory()) || !(action.equals(InventoryAction.PICKUP_ALL) || action.equals(InventoryAction.PLACE_ALL))) {
             event.setCancelled(true);
         }
         ItemStack item = event.getCurrentItem();
-        if(item == null || event.getClick() == ClickType.DOUBLE_CLICK){
+        if (item == null || event.getClick() == ClickType.DOUBLE_CLICK) {
             return;
         }
-        for(GuiItem guiItem : items){
-            if(guiItem.equals(item)){
+        for (GuiItem guiItem : items) {
+            if (guiItem.equals(item)) {
                 guiItem.click(event);
                 break;
             }
         }
     }
 
-    protected <T extends GuiItem> void addItem(T item){
+    protected <T extends GuiItem> void addItem(T item) {
         items.add(item);
         item.update();
     }
 
-    Collection<GuiItem> getItems(){
+    Collection<GuiItem> getItems() {
         return items;
     }
 
-    Inventory getInventory(){
+    Inventory getInventory() {
         return this.inventory;
     }
 
-    private int getSize(){
+    private int getSize() {
         return inventory.getSize();
     }
 
-    private boolean isOpened(){
+    private boolean isOpened() {
         return player.getOpenInventory().getTopInventory().equals(this.getInventory());
     }
 
@@ -94,24 +106,11 @@ public class GuiMenu implements Listener{
      *
      * @return ширина (или -1, если инвентарь не квадратной формы)
      */
-    int getWidth(){
+    int getWidth() {
         return getWidth(inventory.getType());
     }
 
-    private static int getWidth(InventoryType type){
-        return switch(type){
-            case CHEST, PLAYER, ENDER_CHEST, SHULKER_BOX -> 9;
-            case DISPENSER, DROPPER, WORKBENCH -> 3;
-            case HOPPER -> 5;
-            default -> -1;
-        };
-    }
-
-    int getHeight(){
+    int getHeight() {
         return this.getSize() / this.getWidth();
-    }
-
-    public static void openGui(GuiMenu gui){
-        gui.openOwner();
     }
 }

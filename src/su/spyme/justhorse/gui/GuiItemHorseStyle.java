@@ -10,12 +10,12 @@ import su.spyme.justhorse.utils.GuiItem;
 import su.spyme.justhorse.utils.GuiMenu;
 
 
-public class GuiItemHorseStyle extends GuiItem implements Listener{
+public class GuiItemHorseStyle extends GuiItem implements Listener {
 
     private final String perm;
     private final Horse.Style horseStyle;
 
-    GuiItemHorseStyle(GuiMenu guiMenu, int x, int y, Material material, Horse.Style horseStyle){
+    GuiItemHorseStyle(GuiMenu guiMenu, int x, int y, Material material, Horse.Style horseStyle) {
         super(guiMenu, x, y, material, 1);
         this.perm = Main.instance.getPermission("style_" + horseStyle.name());
         String name = Main.instance.getMessage("style_" + horseStyle.name());
@@ -23,7 +23,7 @@ public class GuiItemHorseStyle extends GuiItem implements Listener{
         this.horseStyle = horseStyle;
         StringBuilder builder = new StringBuilder(Main.instance.getMessage("style").replace("%name%", name));
 
-        if(!deny.isEmpty()){
+        if (!deny.isEmpty()) {
             builder.append("\n§r\n").append(deny);
         }
 
@@ -32,14 +32,14 @@ public class GuiItemHorseStyle extends GuiItem implements Listener{
     }
 
     @Override
-    public void click(InventoryClickEvent event){
+    public void click(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
         Horse horse = Main.horses.get(player);
-        if(horse == null){
+        if (horse == null) {
             player.sendMessage(Main.whereHorse);
-        }else if(player.hasPermission(this.perm)){
+        } else if (player.hasPermission(this.perm)) {
             horse.setStyle(this.horseStyle);
-        }else{
+        } else {
             player.sendMessage(Main.noPermission);
         }
     }

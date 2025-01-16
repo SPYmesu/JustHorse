@@ -1,5 +1,5 @@
-#If you find any bug please PM to developer.
-#VK: vk.me/SPY_me
+#If you find any bug please create an issue.
+#https://github.com/SPYmesu/JustHorse/issues/new
 main:
   #Enable all plugin features
   ENABLE: true
@@ -47,6 +47,7 @@ settings:
   COOLDOWN_TIME: 5
 msg:
   NO_PERMISSION: '&2JustHorse &8» &fYou have no permission.'
+  ONLY_PLAYER: '&2JustHorse &8» &fThis command can use only player.'
   USAGE: '&2JustHorse &8» &fUsage: &6/horse'
   #Horse display name (Horse %player%)
   HORSE: 'Horse'

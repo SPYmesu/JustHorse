@@ -1,7 +1,10 @@
 name: JustHorse
-version: 2.2
-api-version: 1.13
+version: 2.3
+api-version: 1.21.3
 main: su.spyme.justhorse.Main
+description: Horse plugin for Hub server
+author: SPY_me
 commands:
-  horse:
-    description: Main plugin command
+  justhorse:
+    aliases: [ horse ]
+    description: Summon personal horse

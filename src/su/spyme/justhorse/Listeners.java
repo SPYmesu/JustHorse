@@ -16,76 +16,76 @@ import su.spyme.justhorse.utils.GuiMenu;
 
 import java.util.Map;
 
-public class Listeners implements Listener{
+public class Listeners implements Listener {
 
     private final Map<Player, Horse> horses = Main.horses;
 
     @EventHandler
-    public void onGetOff(VehicleExitEvent event){
+    public void onGetOff(VehicleExitEvent event) {
         Player player = (Player) event.getExited();
-        if(horses.containsKey(player) && Main.getOff){
+        if (horses.containsKey(player) && Main.getOff) {
             Horse horse = horses.get(player);
             Main.horses.remove(player);
             horse.remove();
-            if(Main.enableCooldown){
+            if (Main.enableCooldown) {
                 Main.addCooldown(player);
             }
         }
     }
 
     @EventHandler
-    public void onQuit(PlayerQuitEvent event){
+    public void onQuit(PlayerQuitEvent event) {
         Player player = event.getPlayer();
-        if(horses.containsKey(player) && Main.quit){
+        if (horses.containsKey(player) && Main.quit) {
             Horse horse = horses.get(player);
             Main.horses.remove(player);
             horse.remove();
-            if(Main.enableCooldown){
+            if (Main.enableCooldown) {
                 Main.addCooldown(player);
             }
         }
     }
 
     @EventHandler
-    public void onDeath(EntityDeathEvent event){
-        if((event.getEntity() instanceof Horse horse) && Main.death){
+    public void onDeath(EntityDeathEvent event) {
+        if ((event.getEntity() instanceof Horse horse) && Main.death) {
             event.getDrops().clear();
             event.setDroppedExp(0);
-            if(horse.getPassengers().isEmpty()) return;
+            if (horse.getPassengers().isEmpty()) return;
             Player player = (Player) horse.getPassengers().get(0);
             Main.horses.remove(player);
             horse.remove();
-            if(Main.enableCooldown){
+            if (Main.enableCooldown) {
                 Main.addCooldown(player);
             }
         }
     }
 
     @EventHandler
-    public void onDamage(EntityDamageByEntityEvent event){
-        if((event.getEntity() instanceof Horse horse) && Main.damage){
+    public void onDamage(EntityDamageByEntityEvent event) {
+        if ((event.getEntity() instanceof Horse horse) && Main.damage) {
             Player player = (Player) horse.getPassengers().get(0);
-            if(horses.containsKey(player)){
+            if (horses.containsKey(player)) {
                 event.setCancelled(true);
             }
         }
     }
 
     @EventHandler
-    public void onDamage(EntityDamageEvent event){
-        if((event.getEntity() instanceof Horse horse) && Main.damage){
+    public void onDamage(EntityDamageEvent event) {
+        if ((event.getEntity() instanceof Horse horse) && Main.damage) {
             Player player = (Player) horse.getPassengers().get(0);
-            if(horses.containsKey(player)){
+            if (horses.containsKey(player)) {
                 event.setCancelled(true);
             }
         }
     }
 
     @EventHandler
-    public void onClick(InventoryClickEvent event){
+    public void onClick(InventoryClickEvent event) {
         Player player = (Player) event.getWhoClicked();
-        if(player.getOpenInventory().getTitle().equals(Main.horse + " " + player.getName())){
-            if(Main.enableSettings){
+        if (player.getOpenInventory().getTitle().equals(Main.horse + " " + player.getName())) {
+            if (Main.enableSettings) {
                 event.setCancelled(true);
                 GuiMenu.openGui(new GuiMenuHorse(player));
             }
@@ -93,10 +93,10 @@ public class Listeners implements Listener{
     }
 
     @EventHandler
-    public void onInv(InventoryOpenEvent event){
+    public void onInv(InventoryOpenEvent event) {
         Player player = (Player) event.getPlayer();
         Main.instance.later(() -> {
-            if(player.getOpenInventory().getTitle().equals(Main.horse + " " + player.getName()) && Main.enableSettings){
+            if (player.getOpenInventory().getTitle().equals(Main.horse + " " + player.getName()) && Main.enableSettings) {
                 GuiMenu.openGui(new GuiMenuHorse(player));
             }
         });

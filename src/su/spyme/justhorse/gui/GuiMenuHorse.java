@@ -10,9 +10,9 @@ import su.spyme.justhorse.utils.GuiMenu;
  * Гуи настройки лошади
  */
 
-public class GuiMenuHorse extends GuiMenu{
+public class GuiMenuHorse extends GuiMenu {
 
-    public GuiMenuHorse(Player player){
+    public GuiMenuHorse(Player player) {
         super(player, 3, Main.menuTitle);
 
         int x1 = 1;
