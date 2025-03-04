@@ -84,7 +84,7 @@ public class Main extends JavaPlugin implements Listener {
             Bukkit.getConsoleSender().sendMessage(ChatColor.RED + "JustHorse disabled in config.");
             return;
         }
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.3 by SPY_me enabled.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.4 by SPY_me enabled.");
         Bukkit.getServer().getPluginManager().registerEvents(new Listeners(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiMenu(), this);
         Bukkit.getServer().getPluginManager().registerEvents(new GuiListener(), this);
@@ -104,6 +104,7 @@ public class Main extends JavaPlugin implements Listener {
         //Настройки
         enableSettings = getConfig().getBoolean("main.ENABLE_SETTINGS", true);
         enableCooldown = getConfig().getBoolean("main.ENABLE_COOLDOWN", true);
+        getOff = getConfig().getBoolean("settings.REMOVE_ON_GET_OFF", true);
         quit = getConfig().getBoolean("settings.REMOVE_ON_PLAYER_QUIT", true);
         death = getConfig().getBoolean("settings.REMOVE_ON_DEATH", true);
         damage = getConfig().getBoolean("settings.CANCEL_DAMAGE", true);
@@ -139,7 +140,7 @@ public class Main extends JavaPlugin implements Listener {
             Horse value = entry.getValue();
             value.remove();
         }
-        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.3 by SPY_me disabled.");
+        Bukkit.getConsoleSender().sendMessage(ChatColor.GREEN + "JustHorse v2.4 by SPY_me disabled.");
     }
 
     public String getMessage(String key) {

@@ -48,7 +48,8 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onDeath(EntityDeathEvent event) {
-        if ((event.getEntity() instanceof Horse horse) && Main.death) {
+        if ((event.getEntity() instanceof Horse) && Main.death) {
+            Horse horse = (Horse) event.getEntity();
             event.getDrops().clear();
             event.setDroppedExp(0);
             if (horse.getPassengers().isEmpty()) return;
@@ -63,7 +64,8 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
-        if ((event.getEntity() instanceof Horse horse) && Main.damage) {
+        if ((event.getEntity() instanceof Horse) && Main.damage) {
+            Horse horse = (Horse) event.getEntity();
             Player player = (Player) horse.getPassengers().get(0);
             if (horses.containsKey(player)) {
                 event.setCancelled(true);
@@ -73,7 +75,8 @@ public class Listeners implements Listener {
 
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
-        if ((event.getEntity() instanceof Horse horse) && Main.damage) {
+        if ((event.getEntity() instanceof Horse) && Main.damage) {
+            Horse horse = (Horse) event.getEntity();
             Player player = (Player) horse.getPassengers().get(0);
             if (horses.containsKey(player)) {
                 event.setCancelled(true);

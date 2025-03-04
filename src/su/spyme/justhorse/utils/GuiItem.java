@@ -28,8 +28,8 @@ public class GuiItem {
         this(guiMenu, x, y, item, "");
     }
 
-    public GuiItem(GuiMenu guiMenu, int x, int y, Material material, int amount) {
-        this(guiMenu, x, y, new ItemStack(material, amount));
+    public GuiItem(GuiMenu guiMenu, int x, int y, Material material, short data, int amount) {
+        this(guiMenu, x, y, new ItemStack(material, amount, data));
     }
 
     private GuiItem(GuiMenu guiMenu, int x, int y, ItemStack item, String text) {
@@ -176,7 +176,7 @@ public class GuiItem {
         ItemMeta meta = item.getItemMeta();
         if (meta != null) {
             if (enchantEffect) {
-                meta.addEnchant(Enchantment.POWER, 1, true);
+                meta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
             } else {
                 meta.getEnchants().keySet().forEach(meta::removeEnchant);
             }

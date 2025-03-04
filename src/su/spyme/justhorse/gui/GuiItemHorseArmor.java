@@ -17,8 +17,8 @@ public class GuiItemHorseArmor extends GuiItem implements Listener {
     private final String perm;
     private final Material material;
 
-    GuiItemHorseArmor(GuiMenu guiMenu, int x, int y, Material material, String name) {
-        super(guiMenu, x, y, material, 1);
+    GuiItemHorseArmor(GuiMenu guiMenu, int x, int y, Material material, short data, String name) {
+        super(guiMenu, x, y, material, data, 1);
         this.perm = Main.instance.getPermission("armor_" + name);
         String deny = Main.instance.getMessage("armor_deny_" + name);
         name = Main.instance.getMessage("armor_" + name);

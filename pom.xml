@@ -5,13 +5,13 @@
 
     <groupId>su.spyme</groupId>
     <artifactId>JustHorse</artifactId>
-    <version>2.2</version>
+    <version>2.4</version>
     <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.mainClass>su.spyme.justhorse.Main</project.mainClass>
-        <java.version>17</java.version>
+        <java.version>1.8</java.version>
     </properties>
 
     <repositories>
@@ -32,13 +32,8 @@
         <dependency>
             <groupId>org.spigotmc</groupId>
             <artifactId>spigot-api</artifactId>
-            <version>1.21.3-R0.1-SNAPSHOT</version>
+            <version>1.12.2-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.jetbrains</groupId>
-            <artifactId>annotations</artifactId>
-            <version>23.1.0</version>
         </dependency>
     </dependencies>
 

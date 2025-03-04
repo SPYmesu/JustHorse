@@ -15,8 +15,8 @@ public class GuiItemHorseColor extends GuiItem implements Listener {
     private final String perm;
     private final Horse.Color horseColor;
 
-    GuiItemHorseColor(GuiMenu guiMenu, int x, int y, Material material, Horse.Color horseColor) {
-        super(guiMenu, x, y, material, 1);
+    GuiItemHorseColor(GuiMenu guiMenu, int x, int y, Material material, short data, Horse.Color horseColor) {
+        super(guiMenu, x, y, material, data, 1);
         this.perm = Main.instance.getPermission("color_" + horseColor.name());
         String name = Main.instance.getMessage("color_" + horseColor.name());
         String deny = Main.instance.getMessage("color_deny_" + horseColor.name());

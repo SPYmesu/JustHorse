@@ -43,13 +43,22 @@ public class GuiMenu implements Listener {
 
     }
 
-    private static int getWidth(InventoryType type) {
-        return switch (type) {
-            case CHEST, PLAYER, ENDER_CHEST, SHULKER_BOX -> 9;
-            case DISPENSER, DROPPER, WORKBENCH -> 3;
-            case HOPPER -> 5;
-            default -> -1;
-        };
+    public static int getWidth(InventoryType type) {
+        switch (type) {
+            case CHEST:
+            case PLAYER:
+            case ENDER_CHEST:
+            case SHULKER_BOX:
+                return 9;
+            case DISPENSER:
+            case DROPPER:
+            case WORKBENCH:
+                return 3;
+            case HOPPER:
+                return 5;
+            default:
+                return -1;
+        }
     }
 
     public static void openGui(GuiMenu gui) {
