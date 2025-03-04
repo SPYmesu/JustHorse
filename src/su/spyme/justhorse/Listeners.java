@@ -52,7 +52,7 @@ public class Listeners implements Listener {
             event.getDrops().clear();
             event.setDroppedExp(0);
             if (horse.getPassengers().isEmpty()) return;
-            Player player = (Player) horse.getPassengers().get(0);
+            Player player = (Player) horse.getPassengers().getFirst();
             Main.horses.remove(player);
             horse.remove();
             if (Main.enableCooldown) {
@@ -64,7 +64,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onDamage(EntityDamageByEntityEvent event) {
         if ((event.getEntity() instanceof Horse horse) && Main.damage) {
-            Player player = (Player) horse.getPassengers().get(0);
+            Player player = (Player) horse.getPassengers().getFirst();
             if (horses.containsKey(player)) {
                 event.setCancelled(true);
             }
@@ -74,7 +74,7 @@ public class Listeners implements Listener {
     @EventHandler
     public void onDamage(EntityDamageEvent event) {
         if ((event.getEntity() instanceof Horse horse) && Main.damage) {
-            Player player = (Player) horse.getPassengers().get(0);
+            Player player = (Player) horse.getPassengers().getFirst();
             if (horses.containsKey(player)) {
                 event.setCancelled(true);
             }

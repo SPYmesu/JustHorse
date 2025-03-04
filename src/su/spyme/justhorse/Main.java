@@ -104,6 +104,7 @@ public class Main extends JavaPlugin implements Listener {
         //Настройки
         enableSettings = getConfig().getBoolean("main.ENABLE_SETTINGS", true);
         enableCooldown = getConfig().getBoolean("main.ENABLE_COOLDOWN", true);
+        getOff = getConfig().getBoolean("settings.REMOVE_ON_GET_OFF", true);
         quit = getConfig().getBoolean("settings.REMOVE_ON_PLAYER_QUIT", true);
         death = getConfig().getBoolean("settings.REMOVE_ON_DEATH", true);
         damage = getConfig().getBoolean("settings.CANCEL_DAMAGE", true);
